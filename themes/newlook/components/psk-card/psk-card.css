@@ -1,6 +1,4 @@
-.card.psk-card,
-.image_container,
-.psk-description {
+.card.psk-card, .image_container, .psk-description {
     background: none;
     border: none;
     padding: 10px 0px 10px;
@@ -15,16 +13,13 @@
     padding: 0.5rem 0;
 }
 
-.psk-card p,
-.psk-card li,
-.psk-card .card-body {
+.psk-card p, .psk-card li, .psk-card .card-body {
     text-align: justify;
 }
 
 .card.psk-card .card.psk-card {
     padding: 0.5rem 0;
 }
-
 
 /** first level*/
 
@@ -46,7 +41,6 @@
     font-size: 1.424rem;
     font-weight: bold;
 }
-
 
 /** second level*/
 
@@ -97,79 +91,17 @@
     margin-right: 3px;
 }
 
-
-/* toc  */
-
-.table-of-content {
-    width: 20rem;
-    position: fixed;
-    right: 6px;
-    top: 125px;
-    height: 80vh;
-    overflow: auto;
-    scrollbar-width: none;
-}
-
-.table-of-content::-webkit-scrollbar {
-    display: none;
-}
-
-.table-of-content .psk-card .card-body,
-.table-of-content .psk-card .card-header {
-    padding-left: 0;
-    padding-right: 40px;
-    padding-bottom: 0;
-}
-
-.table-of-content .psk-card {
-    padding: 0;
-}
-
-.table-of-content .psk-card .card-header h5 {
-    font-weight: bold;
-    font-size: 1rem;
-    color: #354F9B;
-    border-bottom: 2px solid #354F9B;
-    padding-bottom: 0.5rem;
-}
-
-.table-of-content .card-body span {
-    font-size: 0.9rem;
-    color: #4C71DE;
-}
-
-.table-of-content .card-body span:hover {
-    color: #0029b4;
-}
-
-.psk-card .table-of-content {
-    position: static;
-}
-
-.table-of-content .card-body ul li {
-    text-align: left;
-}
-
-.table-of-content .psk-card ul ul li::before {
-    content: "";
-}
-
-
 /* code tag */
 
-.psk-card .card-body p code,
-.psk-card .card-body ul code,
-.psk-card .card-body .psk-description code {
+.psk-card .card-body p code, .psk-card .card-body ul code, .psk-card .card-body .psk-description code {
     color: #008A64;
     font-size: 100%;
     padding: 0 3px;
 }
 
-
 /* list style */
 
-.psk-card ul,
-.psk-card ol {
+.psk-card ul, .psk-card ol {
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
     margin: 0;
@@ -209,7 +141,6 @@ ol>li::before {
     padding: 0px;
 }
 
-
 /* page not-available */
 
 .psk-card#not-available .card-header h5 {
@@ -226,7 +157,6 @@ ol>li::before {
 
 .psk-card#not-available {
     position: relative;
-    left: 10rem;
     background-image: url(../../../../assets/images/404.png);
     background-repeat: no-repeat;
     background-size: 200px;
@@ -236,27 +166,7 @@ ol>li::before {
 }
 
 @media (max-width: 960px) {
-    .table-of-content {
-        position: static;
-        margin: 0 auto;
-        padding-bottom: 0;
-        height: auto;
-    }
-    .table-of-content .card-body span {
-        font-size: 0.875rem;
-    }
-    .table-of-content .psk-card ul {
-        margin: 0;
-        padding-bottom: 0;
-        padding-left: 2px;
-    }
-    .table-of-content .card-body>ul>li:first-of-type::before,
-    .table-of-content .card-body>ul li.current_view {
-        display: none;
-    }
-    .card.psk-card,
-    .image_container,
-    .psk-description {
+    .card.psk-card, .image_container, .psk-description {
         padding: 10px 5px 5px;
     }
     /** first level*/
@@ -280,9 +190,6 @@ ol>li::before {
     }
     .psk-card .card-body div {
         padding-top: 0.5rem;
-    }
-    .psk-card#not-available {
-        left: 0;
     }
     .psk-card#not-available .card-header h5 {
         font-size: 1.266rem;

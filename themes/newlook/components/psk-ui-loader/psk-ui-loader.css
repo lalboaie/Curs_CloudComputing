@@ -146,9 +146,7 @@
 }
 
 @-webkit-keyframes sk-circleFadeDelay {
-    0%,
-    39%,
-    100% {
+    0%, 39%, 100% {
         opacity: 0;
     }
     40% {
@@ -157,9 +155,7 @@
 }
 
 @keyframes sk-circleFadeDelay {
-    0%,
-    39%,
-    100% {
+    0%, 39%, 100% {
         opacity: 0;
     }
     40% {
@@ -169,8 +165,7 @@
 
 .loader-container {
     height: 75vh;
-    position:relative;
-    left:10rem;
+    position: relative;
     min-height: 100%;
     display: flex;
     justify-content: center;

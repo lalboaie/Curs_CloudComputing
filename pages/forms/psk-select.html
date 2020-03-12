@@ -31,10 +31,17 @@
                         <psk-select view-model="nationality"></psk-select>
 
                         <!-- This component is loaded using the options defined by the select-options attribute -->
-                        <psk-select label="Select your city of birth" select-options="Iasi | Bucuresti | Timisoara"></psk-select>
+                        <psk-select 
+                            label="Select your city of birth" 
+                            select-options="Iasi | Bucuresti | Timisoara">
+                        </psk-select>
 
                         <!-- This component has the property "multiple", so the selection can be multiple. -->
-                        <psk-select label="Select numbers above 20" selection-type="multiple" select-options="1, 1 | 21, 21 | 22 | 40 | 5 | 12, 12"></psk-select>
+                        <psk-select 
+                            label="Select numbers above 20" 
+                            selection-type="multiple" 
+                            select-options="1, 1 | 21, 21 | 22 | 40 | 5 | 12, 12">
+                        </psk-select>
                     </psk-form-row>
                 </psk-form>
             </psk-code>
