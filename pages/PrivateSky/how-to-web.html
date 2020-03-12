@@ -81,15 +81,16 @@
                          src="/assets/images/how_to_web/web_index_html_file.png">
                 </psk-img>
             Open and paste into file <b>index.html</b> the following code
-                <psk-code language="markup">
-                    <html>
-                    <head>
+                <psk-code language="html">
+                    &lt;!DOCTYPE html&gt;
+                    &lt;html&gt;
+                    &lt;head&gt;
                         <meta charset="UTF-8">
                         <title>PSK Web demo</title>
                         <script type="application/javascript" src="../psknode/bundles/webshims.js"></script>
                         <script type="application/javascript" src="../psknode/bundles/pskruntime.js"></script>
-                    </head>
-                    <body>
+                    &lt;/head&gt;
+                    &lt;body&gt;
                     <script type="application/javascript">
                         const pskCommunicationNodeAddrs = ["http://127.0.0.1:8080/", "http://localhost:8080/"];
                         const se = require("swarm-engine");
@@ -107,8 +108,8 @@
                             });
 
                     </script>
-                    </body>
-                    </html>
+                    &lt;/body&gt;
+                    &lt;/html&gt;
                 </psk-code>
                 <b>Notes:</b><psk-list>
                                 Make sure that the connection data (<b>'http://127.0.0.1:8080'</b> and '<b>local</b>/agent/example') are the correct ones that are displayed in the terminal.
