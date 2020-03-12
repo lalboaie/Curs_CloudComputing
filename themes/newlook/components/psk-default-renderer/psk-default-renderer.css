@@ -71,13 +71,10 @@ section {
     order: 2;
     flex: 8;
     height: 100%;
-    overflow: auto;
-    scrollbar-color: #354f9b #e5e5e5;
-    scrollbar-width: thin;
+    overflow: hidden;
 }
 
-aside::-webkit-scrollbar,
-section::-webkit-scrollbar {
+aside::-webkit-scrollbar {
     background-color: #fff;
     width: 7px;
 }
@@ -85,16 +82,14 @@ section::-webkit-scrollbar {
 
 /* background of the scrollbar except button or resizer */
 
-aside::-webkit-scrollbar-track,
-section::-webkit-scrollbar-track {
+aside::-webkit-scrollbar-track {
     background-color: #354f9b;
 }
 
 
 /* scrollbar itself */
 
-aside::-webkit-scrollbar-thumb,
-section::-webkit-scrollbar-thumb {
+aside::-webkit-scrollbar-thumb{
     background-color: #fff;
     border-radius: 10px;
     border: 1px solid #354f9b;
