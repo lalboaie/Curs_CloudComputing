@@ -5,35 +5,21 @@
             max-width: 500px!important;
         }
     </style>
-    <psk-chapter title="Attention">
-        Take note that next tutorial is for those that <b>contribute</b> to PrivateSky project and use the development
-        project not the release one!
-    </psk-chapter>
     <psk-chapter title="Prerequisites">
         First we recommend to read and follow the information found on
         <psk-link page="privatesky/installation">Setup page</psk-link>
     </psk-chapter>
     <psk-chapter title="Add new functionality to a PSK Node">
         <psk-description>
-            Extending PSK Node functionality means to add new SWARM definitions that model new business workflows.
+            Extending PSK Node functionality means adding new SWARM definitions that model new business workflows.
             Adding new SWARM definitions is really easy, all we need to do is to create or update a file with the
-            business logic that is desired. Suppose that the PSK Node needs an Echo swarm capable to show that the
+            business logic that is desired. Suppose that the PSK Node needs an <i>Echo</i> swarm capable to show that the
             system is up and running and everything goes according to plan.
         </psk-description>
         <psk-list list-type="ordered">
-            Navigate to the directory that holds the PSK Node source code and identify the folder libraries
-                <psk-img title="PrivateSky installation folder"
-                         src="/assets/images/how_to_web/privatesky_installation_folder.png">
-                </psk-img>
-            Open folder <b>libraries</b> and create a new folder called <b>example</b>
-                <psk-img title="Create example folder"
-                         src="/assets/images/how_to_web/create_example_folder.png">
-                </psk-img>
-            In the new folder create a file called <b>index.js</b>
-                <psk-img title="Create index.js file into example folder"
-                         src="/assets/images/how_to_web/create_index_file.png">
-                </psk-img>
-            Open the file <b>index.js</b> and paste the following code:
+            Navigate to the directory that holds the PSK Node source code and identify the <b>domain</b> folder
+            Open the <b>domain</b> folder
+            Open the file <b>index.js</b> and add the following code:
                 <psk-code language="JavaScript">
                     $$.swarms.describe("Echo",{
                         say: function(input){
