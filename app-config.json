@@ -145,6 +145,9 @@
                         "name": "psk-example"
                     },
                     {
+                        "name": "psk-highlight"
+                    },
+                    {
                         "name": "psk-img"
                     },
                     {
