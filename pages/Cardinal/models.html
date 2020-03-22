@@ -98,4 +98,185 @@
         <p>In time, all the components will be able to have bindings, right now, all the form components have implmented two-way binding (explained in <psk-link page='forms/using-forms'>Using Forms</psk-link> page).</p>
         <p>There is not much to do here, you just need to make sure that the components are binded and the two-way is handled by the components.</p>
     </psk-chapter>
+
+    <psk-chapter title="Expressions">
+        <p><strong>Expressions</strong> are a way of adding business logic to models. These are plain callbacks which are executed in the context of a model and are bound to Cardinal components using the <code>@</code> syntax.</p>
+        <p>
+        This feature was designed to work with the <code>psk-condition</code> component in order to allow conditional rendering of other components or native HTML elements, nevertheless expressions work just as well as a standalone feature used outside of web components. For more information on how to use expressions with <code>psk-condition</code> read the <psk-link page="PSK Wiki/psk-condition">dedicated page</psk-link> in the documentation.
+        </p>
+
+        <psk-chapter title="Creating expressions">
+            <p>To create an expression use the <code>model.addExpression()</code> method:</p>
+
+            <psk-code language="javascript">
+                model.addExpression('expressionName', callback, 'chain1', 'chain2', ...);
+            </psk-code>
+
+            <p><strong>Example</strong></p>
+            <psk-code language="javascript">
+                class MyController extends BindableController {
+                    constructor(element) {
+                        super(element);
+                        this.model = this.setModel({
+                            name: 'John Doe',
+                            email: 'john.doe@unknown-email.com',
+                            address: {
+                                city: 'London',
+                                country: 'United Kingdom'
+                            },
+                            orders: [
+                                {
+                                    id: 1,
+                                    amount: 4.99
+                                },
+                                {
+                                    id: 2,
+                                    amount: 167.99
+                                }
+                            ]
+                        });
+
+                        // Create expression
+                        this.model.addExpression('totalOrdersAmount', function () {
+                            let total = 0;
+                            for (let order of this.orders) {
+                               total += order.amount ;
+                            }
+                            return total;
+                        }, 'orders');
+                    }
+                }
+            </psk-code>
+            <p>In the above example the <code>totalOrdersAmount</code> expression will compute the total amount for all orders for a user. If this expression is used in tandem with a web component we will need a way to recompute the total amount if the orders change; in order to accomodate that we can tell the model to watch for changes on specific properties which will in turn trigger the re-evaluation of the expression. This is the purpose of the third argument given to the <code>addExpression</code> method. It basically tells the model to watch for changes on the <code>orders</code> property and then re-execute the callback if those changes happen. <strong>Multiple chains can be provided either by passing an array of strings as the third argument or by passing the chains as a variable number of string arguments to the <code>addExpression</code> method.</strong>
+            </p>
+
+            <p><strong>Example of expression re-evaluation</strong>:</p>
+            <psk-code language="javascript">
+                // Controller
+                import BindableController from "./base-controllers/BindableController.js";
+
+                const model = {
+                    gdpr: 0,
+                    amount: 20,
+                    currency: '$',
+                    form: {
+                        email: {
+                            label: 'Email',
+                            name: 'email',
+                            isValid: true
+                        }
+                    }
+                };
+
+                export default class TestConditionController extends BindableController {
+                    constructor(element) {
+                        super(element);
+                        this.model = this.setModel(JSON.parse(JSON.stringify(model)));
+
+                        // Make the amount more user friendly
+                        this.model.addExpression('userFriendlyAmount', function () {
+                            if (this.currency === '$') {
+                                return `${this.currency}${this.amount}`;
+                            }
+
+                            return `${this.amount}${this.currency}`;
+                        }, 'amount', 'currency');
+
+                        // "Change Currency" button click handler
+                        this.on('change-currency', (e) => {
+                            e.preventDefault();
+                            e.stopImmediatePropagation();
+
+                            if (this.model.currency === '$') {
+                                this.model.currency = '€';
+                            } else {
+                                this.model.currency = '$';
+                            }
+                        })
+                    }
+                }
+            </psk-code>
+
+            <psk-code language="markup">
+                <!-- View -->
+                <psk-container controller-name="TestConditionController">
+                    <psk-form-row>
+                        <psk-label label="Amount"></psk-label>
+                        <psk-input type="text" value="@userFriendlyAmount"></psk-input>
+                    </psk-form-row>
+                    <psk-form-row>
+                        <psk-button label="Change Currency" event-name="change-currency" button-class="btn btn-info btn-sm"></psk-button>
+                    </psk-form-row>
+                </psk-container>
+            </psk-code>
+
+            <psk-container controller-name="TestConditionController">
+                <p><strong>Live example</strong></p>
+                <psk-form-row>
+                    <psk-label label="Amount"></psk-label>
+                    <psk-input type="text" value="@userFriendlyAmount"></psk-input>
+                </psk-form-row>
+                <psk-form-row>
+                    <psk-button label="Change Currency" event-name="change-currency" button-class="btn btn-info btn-sm"></psk-button>
+                </psk-form-row>
+            </psk-container>
+            <p>Passing the <code>amount</code> and <code>currency</code> chains as parameters to the <code>addExpression</code> will allow the expression to be re-evaluated and the input component to be re-rendered when those value change.</p>
+        </psk-chapter>
+
+        <psk-chapter title="Using an expression">
+            <p>To see how to use an expression in a web component read the <psk-link page="PSK Wiki/psk-condition">psk-condition documentation</psk-link>.</p>
+
+            <p>Using an expression in a controller requires calling the <code>model.evaluateExpression()</code> method. One advantage of expressions over simple properties is their capability of encapsulating complex logic, including asynchronous operations.</p>
+
+            <p><strong>Example</strong></p>
+            <psk-code language="javascript">
+                class MyController extends BindableController {
+                    constructor(element) {
+                        super(element);
+                        this.model = this.setModel({
+                            name: 'John Doe',
+                            email: 'john.doe@unknown-email.com',
+                            address: {
+                                city: 'London',
+                                country: 'United Kingdom'
+                            },
+                            orders: [
+                                {
+                                    id: 1,
+                                    amount: 4.99
+                                },
+                                {
+                                    id: 2,
+                                    amount: 167.99
+                                }
+                            ]
+                        });
+
+                        // Create expression
+                        this.model.addExpression('saveOrders', function () {
+                            return ajaxSave(this.orders)
+                            .then((result) => {
+                                return Promise.resolve(result);
+                            });
+                        });
+
+                        // Triggered by pressing the "Create order" button
+                        this.on('create-order', (e) => {
+                            e.preventDefault();
+                            e.stopImmediatePropagation();
+
+                            const newOrder = e.data;
+
+                            this.model.orders.push(newOrder);
+
+                            this.model.evaluateExpression('saveOrders').then((result) => {
+                                // Do something with the result
+                            })
+                        })
+                    }
+                }
+            </psk-code>
+        </psk-chapter>
+
+    </psk-chapter>
 </psk-page>
