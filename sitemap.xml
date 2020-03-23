@@ -55,8 +55,6 @@
       </url><url>
         <loc>https://privatesky.xyz/?psk-wiki/psk-code</loc>
       </url><url>
-        <loc>https://privatesky.xyz/?psk-wiki/psk-condition</loc>
-      </url><url>
         <loc>https://privatesky.xyz/?psk-wiki/psk-copy-clipboard</loc>
       </url><url>
         <loc>https://privatesky.xyz/?psk-wiki/psk-description</loc>
@@ -82,6 +80,8 @@
         <loc>https://privatesky.xyz/?web-components/app-root</loc>
       </url><url>
         <loc>https://privatesky.xyz/?web-components/app-router</loc>
+      </url><url>
+        <loc>https://privatesky.xyz/?web-components/condition</loc>
       </url><url>
         <loc>https://privatesky.xyz/?web-components/page-not-found</loc>
       </url><url>
