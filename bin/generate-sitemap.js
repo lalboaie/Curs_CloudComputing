@@ -57,8 +57,8 @@ let buildSiteMap = function() {
       </url>`;
                 }
 
-                if (page.children) {
-                    buildXMLTag(page.children)
+                if (typeof page.children === 'object' && Array.isArray(page.children.items)) {
+                    buildXMLTag(page.children.items)
                 }
             });
         };
