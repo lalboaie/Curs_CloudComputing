@@ -136,9 +136,6 @@
                         "name": "psk-code"
                     },
                     {
-                        "name": "psk-condition"
-                    },
-                    {
                         "name": "psk-copy-clipboard"
                     },
                     {
@@ -182,6 +179,9 @@
                     },
                     {
                         "name": "App Router"
+                    },
+                    {
+                        "name": "Condition"
                     },
                     {
                         "name": "Page Not Found"
