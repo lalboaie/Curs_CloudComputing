@@ -46,6 +46,10 @@ export default class TestConditionController extends BindableController {
         this.on('validate-email', (e) => {
             e.preventDefault();
             e.stopImmediatePropagation();
+            const elements = this._element.getElementsByClassName('alert');
+            for (let el of elements) {
+                el.classList.remove('d-none');
+            }
 
             const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
             const emailValue = this.model.form.email.value;

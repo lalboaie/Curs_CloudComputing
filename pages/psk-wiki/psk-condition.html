@@ -99,6 +99,10 @@
                     this.on('validate-email', (e) => {
                         e.preventDefault();
                         e.stopImmediatePropagation();
+                        const elements = this._element.getElementsByClassName('alert');
+                        for (let el of elements) {
+                            el.classList.remove('d-none');
+                        }
 
                         const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
                         const emailValue = this.model.form.email.value;
@@ -113,8 +117,12 @@
             <!-- View -->
             <psk-container controller-name="TestConditionController">
                 <psk-condition condition="@formHasErrors">
-                    <div class="alert alert-danger">
+                    <div slot="condition-true" class="alert alert-danger d-none">
                         <p>The email address is invalid</p>
+                    </div>
+
+                    <div slot="condition-false" class="alert alert-success d-none">
+                        <p>The email address is valid</p>
                     </div>
                 </psk-condition>
 
@@ -130,8 +138,12 @@
 
         <psk-container controller-name="TestConditionController">
             <psk-condition condition="@formHasErrors">
-                <div class="alert alert-danger">
+                <div slot="condition-true" class="alert alert-danger d-none">
                     <p>The email address is invalid</p>
+                </div>
+
+                <div slot="condition-false" class="alert alert-success d-none">
+                    <p>The email address is valid</p>
                 </div>
             </psk-condition>
 
@@ -151,5 +163,13 @@
         </psk-highlight>
     </psk-chapter>
 
-</psk-page>
+    <psk-chapter title="If/Else behavior">
+        <p><code>psk-condition</code> supports the <code>if/else</code> construct by using <code>slots</code>. To enable this behavior the children of the component must name the slot for each outcome of the condition. This component supports the following slots:</p>
+        <psk-list>
+            <code>condition-true</code>
+            <code>condition-false</code>
+        </psk-list>
+        <p>Consider the code example above, to display a certain element when the condition is true, set the <code>slot</code> attribute to the <code>condition-true</code> value, use <code>condition-false</code> otherwise.</p>
+    </psk-chapter>
 
+</psk-page>
