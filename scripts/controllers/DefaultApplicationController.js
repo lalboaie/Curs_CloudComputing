@@ -215,8 +215,8 @@ export default class DefaultApplicationController extends ApplicationController 
                     };
                 }
 
-                if (Array.isArray(leaf.children)) {
-                    tree[pageName].children = {type: "known", items: leafSearch(leaf.children)};
+                if (typeof leaf.children === 'object' && Array.isArray(leaf.children.items)) {
+                    tree[pageName].children = {type: "known", items: leafSearch(leaf.children.items)};
                 }
                 else if (typeof leaf.children === "string" && leaf.children.indexOf(EVENT_PREFIX) === 0) {
                     let eventName = leaf.children.substring(EVENT_PREFIX.length);
@@ -240,8 +240,10 @@ export default class DefaultApplicationController extends ApplicationController 
                 break;
             }
 
-            if (root[paths[i]].children && i !== paths.length) {
-                root = root[paths[i]].children;
+            const children = root[paths[i]].children;
+
+            if (typeof children === 'object' && typeof children.items === 'object' && i !== paths.length) {
+                root = children.items;
                 continue;
             }
             callback(null, root[paths[i]].path)
