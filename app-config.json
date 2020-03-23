@@ -136,6 +136,9 @@
                         "name": "psk-code"
                     },
                     {
+                        "name": "psk-condition"
+                    },
+                    {
                         "name": "psk-copy-clipboard"
                     },
                     {
