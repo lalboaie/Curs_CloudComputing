@@ -82,6 +82,8 @@
                         throw err;
                     }
 
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const archive = edfs.createBar();
                     archive.addFolder("/home/foo/bar", "bar", (err, archiveDigest) => {
                         if (err) {
                             throw err;
@@ -136,6 +138,8 @@
                     if (err) {
                         throw err;
                     }
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const archive = edfs.createBar();
                     archive.addFile("/home/foo/bar.js", "bar", (err, archiveDigest) => {
                         if (err) {
                              throw err;
@@ -181,6 +185,9 @@
                     if (err) {
                         throw err;
                     }
+
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const archive = edfs.createBar();
                     archive.addfile("/home/foo/bar.js", "bar", (err, archiveDigest) => {
                         if (err) {
                               throw err;
@@ -233,6 +240,9 @@
                     if (err) {
                         throw err;
                     }
+
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const archive = edfs.createBar();
                     archive.writeFile("bar", "content", (err, archiveDigest) => {
                         if (err) {
                             throw err;
@@ -276,6 +286,8 @@
                         throw err;
                     }
 
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const archive = edfs.createBar();
                     archive.writeFile("bar", "content", (err, archiveDigest) => {
                         if (err) {
                             throw err;
@@ -326,13 +338,16 @@
                     if (err) {
                         throw err;
                     }
+
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const archive = edfs.createBar();
                     archive.addFolder("/home/foo/bar", "bar", (err, archiveDigest) => {
                         if (err) {
                             throw err;
                         }
 
                         console.log("This is the archive's hash", archiveDigest);
-                            archive.listFiles( "bar", (err, fileNames) => {
+                        archive.listFiles( "bar", (err, fileNames) => {
                             if (err) {
                                 throw err;
                             }
@@ -377,11 +392,15 @@
                     if (err) {
                         throw err;
                     }
+
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const archive = edfs.createBar();
                     archive.addFolder("/home/foo/bar", "/bar", (err, archiveDigest) => {
                         if (err) {
                             throw err;
                         }
-                            archive.addFolder("/home/foo", "/foo", (err, archiveDigest) => {
+
+                        archive.addFolder("/home/foo", "/foo", (err, archiveDigest) => {
                             if (err) {
                                 throw err;
                             }
