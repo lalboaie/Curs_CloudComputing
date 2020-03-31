@@ -1,0 +1,422 @@
+<psk-page title="RawDossiers APIs">
+    <psk-toc title="In this section"></psk-toc>
+    <psk-chapter title="addFolder">
+        The <b>addFolder()</b> method adds all the files in a specified folder in a dossier.
+        <psk-chapter title="Syntax">
+            <psk-code language="JavaScript">
+                addFolder(fsPath, barPath, callback)
+            </psk-code>
+            <psk-chapter title="Parameters">
+                <i><b>fsPath</b></i><br><br>
+                    The filesystem path where the folder is located. <br><br>
+                <i><b>barPath</b></i><br><br>
+                    The name associated with the folder entry inside the dossier.<br><br>
+                <i><b>callback</b></i><br><br>
+                    The function called when all files in the specified folder have been added to the dossier.
+                    It receives an error and the dossier's hash.<br><br>
+            </psk-chapter>
+        </psk-chapter>
+
+        <psk-chapter title="Description">
+            The <b>addFolder()</b> method reads all files inside a directory located at a specified path, breaks them into bricks and adds
+            an entry inside the dossier's barmap where bricks' hashes are kept. The hashes are used to locate the bricks inside EDFS.
+        </psk-chapter>
+
+        <psk-chapter title="Examples">
+            In the following example the folder "/home/foo/bar" is added to archive under the entry "bar". The callback receives the dossier's hash.
+            <psk-code language="JavaScript">
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
+                    if (err) {
+                        throw err;
+                    }
+
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const rawDossier = edfs.createRawDossier();
+                    rawDossier.addFolder("/home/foo/bar", "bar", (err, archiveDigest) => {
+                        if (err) {
+                            throw err;
+                        }
+
+                        console.log("This is the dossier's hash", archiveDigest);
+                    });
+                });
+            </psk-code>
+
+        </psk-chapter>
+    </psk-chapter>
+
+    <psk-chapter title="extractFolder">
+        The <b>extractFolder()</b> extracts a folder from a RawDossier to a specified location.
+        <psk-chapter title="Syntax">
+            <psk-code language="JavaScript">
+                extractFolder(fsPath, barPath, callback)
+            </psk-code>
+            <psk-chapter title="Parameters">
+                <i><b>fsPath</b></i><br><br>
+                    The filesystem path where the extracted folder is located. <br><br>
+                <i><b>barPath</b></i><br><br>
+                    The path inside the RawDossier where the folder's brick references are stored.<br><br>
+                <i><b>callback</b></i><br><br>
+                    The function when the extraction process is completed.<br><br>
+            </psk-chapter>
+        </psk-chapter>
+
+        <psk-chapter title="Description">
+            The <b>extractFolder()</b> method reads all the brick whose references are kept inside the RawDossier at the path <b>barPath</b> and combines
+            them in order to obtain all the files inside the folder at the specified path.
+        </psk-chapter>
+
+        <psk-chapter title="Examples">
+            In the following example the folder stored inside the archive under the name "bar" is extracted at path "/home/foo/bar".
+            <psk-code language="JavaScript">
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
+                    if (err) {
+                        throw err;
+                    }
+
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const rawDossier = edfs.createRawDossier();
+                    rawDossier.addFolder("/home/foo/bar", "bar", (err, archiveDigest) => {
+                        if (err) {
+                            throw err;
+                        }
+
+                        console.log("This is the dossier's hash", archiveDigest);
+                        rawDossier.extractFolder("/home/foo/bar", "bar", (err) => {
+                            if (err) {
+                                throw err;
+                            }
+
+                            console.log("Successfully extracted");
+                        });
+                    });
+                });
+
+            </psk-code>
+
+        </psk-chapter>
+    </psk-chapter>
+
+    <psk-chapter title="addFile">
+        The <b>addFile()</b> method adds the file at a specified path in a brick archive.
+        <psk-chapter title="Syntax">
+            <psk-code language="JavaScript">
+                addFile(fsPath, barPath, callback)
+            </psk-code>
+            <psk-chapter title="Parameters">
+                <i><b>fsPath</b></i><br><br>
+                The filesystem path where the file is located. <br><br>
+                <i><b>barPath</b></i><br><br>
+                The name associated with the folder entry inside the archive.<br><br>
+                <i><b>callback</b></i><br><br>
+                The function called when all files in the specified folder have been added to the archive.
+                It receives an error and the archive's hash.<br><br>
+            </psk-chapter>
+        </psk-chapter>
+
+        <psk-chapter title="Description">
+            The <b>addFile()</b> method reads the file at the specified path, breaks it into bricks and adds
+            an entry inside the archive's barmap where bricks' hashes are kept. The hashes are used to locate the bricks inside EDFS.
+        </psk-chapter>
+
+        <psk-chapter title="Examples">
+            In the following example the file "/home/foo/bar.js" is added to archive under the entry "bar". The callback receives the archive's hash.
+            <psk-code language="JavaScript">
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
+                    if (err) {
+                        throw err;
+                    }
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const rawDossier = edfs.createRawDossier();
+
+                    rawDossier.addFile("/home/foo/bar.js", "bar", (err, archiveDigest) => {
+                        if (err) {
+                             throw err;
+                        }
+
+                        console.log("This is the dossier's hash", archiveDigest);
+                    });
+                });
+            </psk-code>
+
+        </psk-chapter>
+    </psk-chapter>
+
+    <psk-chapter title="extractFile">
+        The <b>extractFile()</b> extracts a file from a brick archive to a specified location.
+        <psk-chapter title="Syntax">
+            <psk-code language="JavaScript">
+                extractFile(fsPath, barPath, callback)
+            </psk-code>
+            <psk-chapter title="Parameters">
+                <i><b>fsPath</b></i><br><br>
+                The filesystem path where the extracted file is located. <br><br>
+                <i><b>barPath</b></i><br><br>
+                The path inside the archive where the file's brick references are stored.<br><br>
+                <i><b>callback</b></i><br><br>
+                The function when the extraction process is completed.<br><br>
+            </psk-chapter>
+        </psk-chapter>
+
+        <psk-chapter title="Description">
+            The <b>extractFile()</b> method reads all the brick whose references are kept inside the archive at the path <b>barPath</b> and combines
+            them in order to obtain the file stored at <b>fsPath</b>.
+        </psk-chapter>
+
+        <psk-chapter title="Examples">
+            In the following example the file stored inside the archive under the name "bar" is extracted at path "/home/foo/bar.js".
+            <psk-code language="JavaScript">
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
+                    if (err) {
+                        throw err;
+                    }
+
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const rawDossier = edfs.createRawDossier();
+                    rawDossier.addfile("/home/foo/bar.js", "bar", (err, archiveDigest) => {
+                        if (err) {
+                              throw err;
+                        }
+
+                        console.log("This is the dossier's hash", archiveDigest);
+                        rawDossier.extractFolder("/home/foo/bar.js", "bar", (err) => {
+                            if (err) {
+                                throw err;
+                            }
+
+                            console.log("Successfully extracted");
+                        });
+                    });
+                });
+
+            </psk-code>
+
+        </psk-chapter>
+    </psk-chapter>
+
+    <psk-chapter title="writeFile">
+        The <b>writeFile()</b> method writes the given data in a brick archive.
+        <psk-chapter title="Syntax">
+            <psk-code language="JavaScript">
+                writeFile(barPath, data, callback)
+            </psk-code>
+            <psk-chapter title="Parameters">
+                <i><b>barPath</b></i><br><br>
+                The archive entry were the data is written.<br><br>
+                <i><b>data</b></i><br><br>
+                The data added to the archive.<br><br>
+                <i><b>callback</b></i><br><br>
+                The function called when the data is added to the archive.<br><br>
+            </psk-chapter>
+        </psk-chapter>
+
+        <psk-chapter title="Description">
+            The <b>writeFile()</b> breaks the given data into bricks whose references are kept at the specified path inside the archive.
+        </psk-chapter>
+
+        <psk-chapter title="Examples">
+            In the following example the data "content" is added to archive under the entry "bar". The callback receives the archive's hash.
+            <psk-code language="JavaScript">
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
+                    if (err) {
+                        throw err;
+                    }
+
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const rawDossier = edfs.createRawDossier();
+                    rawDossier.writeFile("bar", "content", (err, archiveDigest) => {
+                        if (err) {
+                            throw err;
+                        }
+
+                        console.log("This is the dossier's hash", archiveDigest);
+                    });
+                });
+            </psk-code>
+
+        </psk-chapter>
+    </psk-chapter>
+
+    <psk-chapter title="readFile">
+        The <b>readFile()</b> reads the data written in a brick archive at a specific path.
+        <psk-chapter title="Syntax">
+            <psk-code language="JavaScript">
+                readFile(barPathcallback)
+            </psk-code>
+            <psk-chapter title="Parameters">
+                <i><b>barPath</b></i><br><br>
+                The archive entry from were the data is read.<br><br>
+                <i><b>callback</b></i><br><br>
+                The function called when the data is added to the archive. It receives an error and the read data.<br><br>
+            </psk-chapter>
+        </psk-chapter>
+
+        <psk-chapter title="Description">
+            The <b>readFile()</b> reads the bricks at a specified entry inside the archive and returns the data that was split in order to form the bricks.
+        </psk-chapter>
+
+        <psk-chapter title="Examples">
+            In the following example the data stored at path "bar" inside the archive is read and returned through the callback.
+            <psk-code language="JavaScript">
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
+                    if (err) {
+                        throw err;
+                    }
+
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const rawDossier = edfs.createRawDossier();
+                    rawDossier.writeFile("bar", "content", (err, archiveDigest) => {
+                        if (err) {
+                            throw err;
+                        }
+
+                        console.log("This is the dossier's hash", archiveDigest);
+                        rawDossier.readFile("bar", (err, readData) => {
+                            if (err) {
+                                throw err;
+                            }
+
+                            console.log("This is the data", readData);
+                        });
+                    });
+                });
+            </psk-code>
+
+        </psk-chapter>
+    </psk-chapter>
+
+    <psk-chapter title="listFiles">
+        The <b>listFiles()</b> returns the names of all the files stored inside a brick archive at a specific path.
+        <psk-chapter title="Syntax">
+            <psk-code language="JavaScript">
+                listFiles(barPath, callback)
+            </psk-code>
+            <psk-chapter title="Parameters">
+                <i><b>barPath</b></i><br><br>
+                The archive path from where the file names are read.<br><br>
+                <i><b>callback</b></i><br><br>
+                The function called when the file names have been read. It receives an error and the list of files.<br><br>
+            </psk-chapter>
+        </psk-chapter>
+
+        <psk-chapter title="Description">
+            The <b>listFiles()</b> traverses the specified path inside the archive and returns the names of all the files
+            stored at the specified path.
+        </psk-chapter>
+
+        <psk-chapter title="Examples">
+            In the following example the filenames stored inside the archive at path "bar" are returned through the provided callback.
+            <psk-code language="JavaScript">
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
+                    if (err) {
+                        throw err;
+                    }
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const rawDossier = edfs.createRawDossier();
+                    rawDossier.addFolder("/home/foo/bar", "bar", (err, archiveDigest) => {
+                        if (err) {
+                            throw err;
+                        }
+
+                        console.log("This is the dossier's hash", archiveDigest);
+                        rawDossier.listFiles( "bar", (err, fileNames) => {
+                            if (err) {
+                                throw err;
+                            }
+
+                            console.log("These are the files", fileNames);
+                        });
+                    });
+                });
+
+            </psk-code>
+
+        </psk-chapter>
+    </psk-chapter>
+
+    <psk-chapter title="listFolders">
+        The <b>listFiles()</b> returns the names of all the folders stored inside a brick archive at a specific path.
+        <psk-chapter title="Syntax">
+            <psk-code language="JavaScript">
+                listFolders(barPath, callback)
+            </psk-code>
+            <psk-chapter title="Parameters">
+                <i><b>barPath</b></i><br><br>
+                The archive path from where the folder names are read.<br><br>
+                <i><b>callback</b></i><br><br>
+                The function called when the folder names have been read. It receives an error and the list of folders.<br><br>
+            </psk-chapter>
+        </psk-chapter>
+
+        <psk-chapter title="Description">
+            The <b>listFiles()</b> traverses the specified path inside the archive and returns the names of all the files
+            stored at the specified path.
+        </psk-chapter>
+
+        <psk-chapter title="Examples">
+            In the following example the folders stored inside the archive at path "/" are returned through the provided callback.
+            <psk-code language="JavaScript">
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
+                    if (err) {
+                        throw err;
+                    }
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const rawDossier = edfs.createRawDossier();
+                    rawDossier.addFolder("/home/foo/bar", "/bar", (err, archiveDigest) => {
+                        if (err) {
+                            throw err;
+                        }
+                        rawDossier.addFolder("/home/foo", "/foo", (err, archiveDigest) => {
+                            if (err) {
+                                throw err;
+                            }
+
+                            console.log("This is the dossier's hash", archiveDigest);
+                            rawDossier.listFiles( "/", (err, folders) => {
+                                if (err) {
+                                    throw err;
+                                }
+
+                                console.log("These are the folders", folders);
+                            });
+                        });
+                    });
+                });
+
+            </psk-code>
+
+        </psk-chapter>
+    </psk-chapter>
+</psk-page>
