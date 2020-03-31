@@ -1,5 +1,154 @@
 <psk-page title="RawDossiers APIs">
     <psk-toc title="In this section"></psk-toc>
+     <psk-chapter title="mount">
+        The <b>mount()</b> method adds a reference to another RawDossier at a specific path.
+        <psk-chapter title="Syntax">
+            <psk-code language="JavaScript">
+                mount(path, name, archiveIdentifier, callback)
+            </psk-code>
+            <psk-chapter title="Parameters">
+                <i><b>path</b></i><br><br>
+                    The path where the RawDossier's reference is added. <br><br>
+                <i><b>name</b></i><br><br>
+                    The name associated with added RawDossier reference.<br><br>
+                <i><b>archiveIdentifier</b></i><br><br>
+                    THe string that uniquely identifies the mounted RawDossier. Usually it's the RawDossier's SEED.<br><br>
+                <i><b>callback</b></i><br><br>
+                    The function called when the mount operation is completed.<br><br>
+            </psk-chapter>
+        </psk-chapter>
+
+        <psk-chapter title="Description">
+            The <b>mount()</b> method creates a reference to a RawDossier and keeps it in a special file stored inside the RawDossier that keeps the reference at the path
+            "/manifest". If a reference with the same name and at the same path
+            already exists, an error is thrown. The mounted RawDossier can store references to other RawDossiers. As a result,
+            all mounted RawDossier form a tree of arbitrary depth. Inside the tree, a RawDossier is uniquely identified by the path that leads to its
+            reference. For example, let's say that a RawDossier having the SEED "seed2" is mounted in a RawDossier with the SEED "seed1" at path "/foo" under
+            the name "bar" which, in turn,
+            is mounted inside the RawDossier whose SEED is "seedRoot" at path "/dir" under the name "baz". The SEED "seed2" that uniquely identifies a RawDossier
+            can be retrieved by traversing the path "/dir/baz/foo/bar".
+        </psk-chapter>
+
+        <psk-chapter title="Examples">
+            In the following example the mountedRawDossier's SEED is added in rootRawDossier at path "/foo" under the name "bar".
+            <psk-code language="JavaScript">
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
+                    if (err) {
+                        throw err;
+                    }
+
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const rootRawDossier = edfs.createRawDossier();
+                    rootRawDossier.mount("/foo", "bar", mountedRawDossier.getSeed(), (err) => {
+                        if (err) {
+                            throw err;
+                        }
+
+                        console.log("Dossier successfully mounted");
+                    });
+                });
+            </psk-code>
+
+        </psk-chapter>
+    </psk-chapter>
+     <psk-chapter title="unmount">
+        The <b>unmount()</b> method removes a reference to a RawDossier.
+        <psk-chapter title="Syntax">
+            <psk-code language="JavaScript">
+                unmount(path, name, callback)
+            </psk-code>
+            <psk-chapter title="Parameters">
+                <i><b>path</b></i><br><br>
+                The path where the RawDossier reference is kept. <br><br>
+                <i><b>name</b></i><br><br>
+                The name associated with the RawDossier reference.<br><br>
+                <i><b>callback</b></i><br><br>
+                    The function called when the operation is completed.<br><br>
+            </psk-chapter>
+        </psk-chapter>
+
+        <psk-chapter title="Description">
+            The <b>unmount()</b> deletes from the file "/manifest" the mounting point at <b>path</b> identified by <b>name</b>.  If no such mounting point exists,
+            then an error is thrown.
+        </psk-chapter>
+
+        <psk-chapter title="Examples">
+            In the following example mounting point at path "/foo" with the name "bar" is deleted.
+            <psk-code language="JavaScript">
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
+                    if (err) {
+                        throw err;
+                    }
+
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const rootRawDossier = edfs.createRawDossier();
+                    rootRawDossier.unmount("/foo", "bar", (err) => {
+                        if (err) {
+                            throw err;
+                        }
+
+                        console.log("Dossier successfully unmounted");
+                    });
+                });
+            </psk-code>
+
+        </psk-chapter>
+    </psk-chapter>
+
+     <psk-chapter title="listMountedDossiers">
+        The <b>listMountedDossiers()</b> method lists all the RawDossiers mounted at a specific path.
+        <psk-chapter title="Syntax">
+            <psk-code language="JavaScript">
+                unmount(path, callback)
+            </psk-code>
+            <psk-chapter title="Parameters">
+                <i><b>path</b></i><br><br>
+                The path where one or more RawDossiers are mounted. The path could traverse multiple RawDossiers. In other words, the sections of the path
+                could represent mounting points where other RawDossiers are mounted. For more details, see <a href="?API/rawdossiers&chapter=description">mount()</a>.<br><br>
+                <i><b>callback</b></i><br><br>
+                    The function called when the operation is completed.<br><br>
+            </psk-chapter>
+        </psk-chapter>
+
+        <psk-chapter title="Description">
+            The <b>unmount()</b> deletes from the file "/manifest" the mounting point at <b>path</b> identified by <b>name</b>.  If no such mounting point exists,
+            then an error is thrown.
+        </psk-chapter>
+
+        <psk-chapter title="Examples">
+            In the following example mounting point at path "/foo" with the name "bar" is deleted.
+            <psk-code language="JavaScript">
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
+                    if (err) {
+                        throw err;
+                    }
+
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const rootRawDossier = edfs.createRawDossier();
+                    rootRawDossier.unmount("/foo", "bar", (err) => {
+                        if (err) {
+                            throw err;
+                        }
+
+                        console.log("Dossier successfully unmounted");
+                    });
+                });
+            </psk-code>
+
+        </psk-chapter>
+    </psk-chapter>
     <psk-chapter title="addFolder">
         The <b>addFolder()</b> method adds all the files in a specified folder in a dossier.
         <psk-chapter title="Syntax">
@@ -115,20 +264,20 @@
                 <i><b>fsPath</b></i><br><br>
                 The filesystem path where the file is located. <br><br>
                 <i><b>barPath</b></i><br><br>
-                The name associated with the folder entry inside the archive.<br><br>
+                The name associated with the folder entry inside the RawDossier.<br><br>
                 <i><b>callback</b></i><br><br>
-                The function called when all files in the specified folder have been added to the archive.
+                The function called when all files in the specified folder have been added to the RawDossier.
                 It receives an error and the RawDossier's hash.<br><br>
             </psk-chapter>
         </psk-chapter>
 
         <psk-chapter title="Description">
             The <b>addFile()</b> method reads the file at the specified path, breaks it into bricks and adds
-            an entry inside the archive's barmap where bricks' hashes are kept. The hashes are used to locate the bricks inside EDFS.
+            an entry inside the RawDossier's barmap where bricks' hashes are kept. The hashes are used to locate the bricks inside EDFS.
         </psk-chapter>
 
         <psk-chapter title="Examples">
-            In the following example the file "/home/foo/bar.js" is added to archive under the entry "bar". The callback receives the archive's hash.
+            In the following example the file "/home/foo/bar.js" is added to the RawDossier under the entry "bar". The callback receives the RawDossier's hash.
             <psk-code language="JavaScript">
                 const VirtualMQ = require("virtualmq");
                 const EDFS = require("edfs");
@@ -155,7 +304,7 @@
     </psk-chapter>
 
     <psk-chapter title="extractFile">
-        The <b>extractFile()</b> extracts a file from a brick archive to a specified location.
+        The <b>extractFile()</b> extracts a file from a RawDossier to a specified location.
         <psk-chapter title="Syntax">
             <psk-code language="JavaScript">
                 extractFile(fsPath, barPath, callback)
@@ -164,19 +313,19 @@
                 <i><b>fsPath</b></i><br><br>
                 The filesystem path where the extracted file is located. <br><br>
                 <i><b>barPath</b></i><br><br>
-                The path inside the archive where the file's brick references are stored.<br><br>
+                The path inside the RawDossier where the file's brick references are stored.<br><br>
                 <i><b>callback</b></i><br><br>
                 The function when the extraction process is completed.<br><br>
             </psk-chapter>
         </psk-chapter>
 
         <psk-chapter title="Description">
-            The <b>extractFile()</b> method reads all the brick whose references are kept inside the archive at the path <b>barPath</b> and combines
+            The <b>extractFile()</b> method reads all the brick whose references are kept inside the RawDossier at the path <b>barPath</b> and combines
             them in order to obtain the file stored at <b>fsPath</b>.
         </psk-chapter>
 
         <psk-chapter title="Examples">
-            In the following example the file stored inside the archive under the name "bar" is extracted at path "/home/foo/bar.js".
+            In the following example the file stored inside the RawDossier under the name "bar" is extracted at path "/home/foo/bar.js".
             <psk-code language="JavaScript">
                 const VirtualMQ = require("virtualmq");
                 const EDFS = require("edfs");
@@ -211,27 +360,27 @@
     </psk-chapter>
 
     <psk-chapter title="writeFile">
-        The <b>writeFile()</b> method writes the given data in a brick archive.
+        The <b>writeFile()</b> method writes the given data in a RawDossier.
         <psk-chapter title="Syntax">
             <psk-code language="JavaScript">
                 writeFile(barPath, data, callback)
             </psk-code>
             <psk-chapter title="Parameters">
                 <i><b>barPath</b></i><br><br>
-                The archive entry were the data is written.<br><br>
+                The RawDossier entry were the data is written.<br><br>
                 <i><b>data</b></i><br><br>
-                The data added to the archive.<br><br>
+                The data added to the RawDossier.<br><br>
                 <i><b>callback</b></i><br><br>
-                The function called when the data is added to the archive.<br><br>
+                The function called when the data is added to the RawDossier.<br><br>
             </psk-chapter>
         </psk-chapter>
 
         <psk-chapter title="Description">
-            The <b>writeFile()</b> breaks the given data into bricks whose references are kept at the specified path inside the archive.
+            The <b>writeFile()</b> breaks the given data into bricks whose references are kept at the specified path inside the RawDossier.
         </psk-chapter>
 
         <psk-chapter title="Examples">
-            In the following example the data "content" is added to archive under the entry "bar". The callback receives the archive's hash.
+            In the following example the data "content" is added to RawDossier under the entry "bar". The callback receives the RawDossier's hash.
             <psk-code language="JavaScript">
                 const VirtualMQ = require("virtualmq");
                 const EDFS = require("edfs");
@@ -258,25 +407,25 @@
     </psk-chapter>
 
     <psk-chapter title="readFile">
-        The <b>readFile()</b> reads the data written in a brick archive at a specific path.
+        The <b>readFile()</b> reads the data written in a RawDossier at a specific path.
         <psk-chapter title="Syntax">
             <psk-code language="JavaScript">
                 readFile(barPathcallback)
             </psk-code>
             <psk-chapter title="Parameters">
                 <i><b>barPath</b></i><br><br>
-                The archive entry from were the data is read.<br><br>
+                The RawDossier path from were the data is read.<br><br>
                 <i><b>callback</b></i><br><br>
-                The function called when the data is added to the archive. It receives an error and the read data.<br><br>
+                The function called when the data is added to the RawDossier. It receives an error and the read data.<br><br>
             </psk-chapter>
         </psk-chapter>
 
         <psk-chapter title="Description">
-            The <b>readFile()</b> reads the bricks at a specified entry inside the archive and returns the data that was split in order to form the bricks.
+            The <b>readFile()</b> reads the bricks at a specified entry inside the RawDossier and returns the data that was split in order to form the bricks.
         </psk-chapter>
 
         <psk-chapter title="Examples">
-            In the following example the data stored at path "bar" inside the archive is read and returned through the callback.
+            In the following example the data stored at path "bar" inside the RawDossier is read and returned through the callback.
             <psk-code language="JavaScript">
                 const VirtualMQ = require("virtualmq");
                 const EDFS = require("edfs");
@@ -310,26 +459,26 @@
     </psk-chapter>
 
     <psk-chapter title="listFiles">
-        The <b>listFiles()</b> returns the names of all the files stored inside a brick archive at a specific path.
+        The <b>listFiles()</b> returns the names of all the files stored inside a RawDossier at a specific path.
         <psk-chapter title="Syntax">
             <psk-code language="JavaScript">
                 listFiles(barPath, callback)
             </psk-code>
             <psk-chapter title="Parameters">
                 <i><b>barPath</b></i><br><br>
-                The archive path from where the file names are read.<br><br>
+                The RawDossier path from where the file names are read.<br><br>
                 <i><b>callback</b></i><br><br>
                 The function called when the file names have been read. It receives an error and the list of files.<br><br>
             </psk-chapter>
         </psk-chapter>
 
         <psk-chapter title="Description">
-            The <b>listFiles()</b> traverses the specified path inside the archive and returns the names of all the files
+            The <b>listFiles()</b> traverses the specified path inside the RawDossier and returns the names of all the files
             stored at the specified path.
         </psk-chapter>
 
         <psk-chapter title="Examples">
-            In the following example the filenames stored inside the archive at path "bar" are returned through the provided callback.
+            In the following example the filenames stored inside the RawDossier at path "bar" are returned through the provided callback.
             <psk-code language="JavaScript">
                 const VirtualMQ = require("virtualmq");
                 const EDFS = require("edfs");
@@ -363,7 +512,7 @@
     </psk-chapter>
 
     <psk-chapter title="listFolders">
-        The <b>listFiles()</b> returns the names of all the folders stored inside a brick archive at a specific path.
+        The <b>listFiles()</b> returns the names of all the folders stored inside a RawDossier at a specific path.
         <psk-chapter title="Syntax">
             <psk-code language="JavaScript">
                 listFolders(barPath, callback)
@@ -377,12 +526,12 @@
         </psk-chapter>
 
         <psk-chapter title="Description">
-            The <b>listFiles()</b> traverses the specified path inside the archive and returns the names of all the files
+            The <b>listFiles()</b> traverses the specified path inside the RawDossier and returns the names of all the files
             stored at the specified path.
         </psk-chapter>
 
         <psk-chapter title="Examples">
-            In the following example the folders stored inside the archive at path "/" are returned through the provided callback.
+            In the following example the folders stored inside the RawDossier at path "/" are returned through the provided callback.
             <psk-code language="JavaScript">
                 const VirtualMQ = require("virtualmq");
                 const EDFS = require("edfs");
