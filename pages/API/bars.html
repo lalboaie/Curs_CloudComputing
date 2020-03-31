@@ -25,13 +25,24 @@
         <psk-chapter title="Examples">
             In the following example the folder "/home/foo/bar" is added to archive under the entry "bar". The callback receives the archive's hash.
             <psk-code language="JavaScript">
-                const archive = new Archive();
-                archive.addFolder("/home/foo/bar", "bar", (err, archiveDigest) => {
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
                     if (err) {
                         throw err;
                     }
 
-                    console.log("This is the archive's hash", archiveDigest);
+                    const edfs = EDFS.attachToEndpoint(endpoint);
+                    const archive = edfs.createBar();
+                    archive.addFolder("/home/foo/bar", "bar", (err, archiveDigest) => {
+                        if (err) {
+                            throw err;
+                        }
+
+                        console.log("This is the archive's hash", archiveDigest);
+                    });
                 });
             </psk-code>
 
@@ -62,19 +73,28 @@
         <psk-chapter title="Examples">
             In the following example the folder stored inside the archive under the name "bar" is extracted at path "/home/foo/bar".
             <psk-code language="JavaScript">
-                const archive = new Archive();
-                archive.addFolder("/home/foo/bar", "bar", (err, archiveDigest) => {
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
                     if (err) {
                         throw err;
                     }
 
-                    console.log("This is the archive's hash", archiveDigest);
-                    archive.extractFolder("/home/foo/bar", "bar", (err) => {
+                    archive.addFolder("/home/foo/bar", "bar", (err, archiveDigest) => {
                         if (err) {
                             throw err;
                         }
 
-                        console.log("Successfully extracted");
+                        console.log("This is the archive's hash", archiveDigest);
+                        archive.extractFolder("/home/foo/bar", "bar", (err) => {
+                            if (err) {
+                                throw err;
+                            }
+
+                            console.log("Successfully extracted");
+                        });
                     });
                 });
 
@@ -108,13 +128,21 @@
         <psk-chapter title="Examples">
             In the following example the file "/home/foo/bar.js" is added to archive under the entry "bar". The callback receives the archive's hash.
             <psk-code language="JavaScript">
-                const archive = new Archive();
-                archive.addFile("/home/foo/bar.js", "bar", (err, archiveDigest) => {
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
                     if (err) {
-                         throw err;
+                        throw err;
                     }
+                    archive.addFile("/home/foo/bar.js", "bar", (err, archiveDigest) => {
+                        if (err) {
+                             throw err;
+                        }
 
-                    console.log("This is the archive's hash", archiveDigest);
+                        console.log("This is the archive's hash", archiveDigest);
+                    });
                 });
             </psk-code>
 
@@ -145,19 +173,27 @@
         <psk-chapter title="Examples">
             In the following example the file stored inside the archive under the name "bar" is extracted at path "/home/foo/bar.js".
             <psk-code language="JavaScript">
-                const archive = new Archive();
-                archive.addfile("/home/foo/bar.js", "bar", (err, archiveDigest) => {
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
                     if (err) {
-                          throw err;
+                        throw err;
                     }
-
-                    console.log("This is the archive's hash", archiveDigest);
-                    archive.extractFolder("/home/foo/bar.js", "bar", (err) => {
+                    archive.addfile("/home/foo/bar.js", "bar", (err, archiveDigest) => {
                         if (err) {
-                            throw err;
+                              throw err;
                         }
 
-                        console.log("Successfully extracted");
+                        console.log("This is the archive's hash", archiveDigest);
+                        archive.extractFolder("/home/foo/bar.js", "bar", (err) => {
+                            if (err) {
+                                throw err;
+                            }
+
+                            console.log("Successfully extracted");
+                        });
                     });
                 });
 
@@ -189,13 +225,21 @@
         <psk-chapter title="Examples">
             In the following example the data "content" is added to archive under the entry "bar". The callback receives the archive's hash.
             <psk-code language="JavaScript">
-                const archive = new Archive();
-                archive.writeFile("bar", "content", (err, archiveDigest) => {
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
                     if (err) {
                         throw err;
                     }
+                    archive.writeFile("bar", "content", (err, archiveDigest) => {
+                        if (err) {
+                            throw err;
+                        }
 
-                    console.log("This is the archive's hash", archiveDigest);
+                        console.log("This is the archive's hash", archiveDigest);
+                    });
                 });
             </psk-code>
 
@@ -223,20 +267,28 @@
         <psk-chapter title="Examples">
             In the following example the data stored at path "bar" inside the archive is read and returned through the callback.
             <psk-code language="JavaScript">
-                const archive = new Archive();
-
-                archive.writeFile("bar", "content", (err, archiveDigest) => {
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
                     if (err) {
                         throw err;
                     }
 
-                    console.log("This is the archive's hash", archiveDigest);
-                    archive.readFile("bar", (err, readData) => {
+                    archive.writeFile("bar", "content", (err, archiveDigest) => {
                         if (err) {
                             throw err;
                         }
 
-                        console.log("This is the data", readData);
+                        console.log("This is the archive's hash", archiveDigest);
+                        archive.readFile("bar", (err, readData) => {
+                            if (err) {
+                                throw err;
+                            }
+
+                            console.log("This is the data", readData);
+                        });
                     });
                 });
             </psk-code>
@@ -266,19 +318,27 @@
         <psk-chapter title="Examples">
             In the following example the filenames stored inside the archive at path "bar" are returned through the provided callback.
             <psk-code language="JavaScript">
-                const archive = new Archive();
-                archive.addFolder("/home/foo/bar", "bar", (err, archiveDigest) => {
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
                     if (err) {
                         throw err;
                     }
-
-                    console.log("This is the archive's hash", archiveDigest);
-                        archive.listFiles( "bar", (err, fileNames) => {
+                    archive.addFolder("/home/foo/bar", "bar", (err, archiveDigest) => {
                         if (err) {
                             throw err;
                         }
 
-                        console.log("These are the files", fileNames);
+                        console.log("This is the archive's hash", archiveDigest);
+                            archive.listFiles( "bar", (err, fileNames) => {
+                            if (err) {
+                                throw err;
+                            }
+
+                            console.log("These are the files", fileNames);
+                        });
                     });
                 });
 
@@ -309,23 +369,31 @@
         <psk-chapter title="Examples">
             In the following example the folders stored inside the archive at path "/" are returned through the provided callback.
             <psk-code language="JavaScript">
-                const archive = new Archive();
-                archive.addFolder("/home/foo/bar", "/bar", (err, archiveDigest) => {
+                const VirtualMQ = require("virtualmq");
+                const EDFS = require("edfs");
+                const port = 8080;
+                const endpoint = "http://127.0.0.1:" + port;
+                VirtualMQ.createVirtualMQ(port, "../../tmp", undefined, (err) => {
                     if (err) {
                         throw err;
                     }
-                        archive.addFolder("/home/foo", "/foo", (err, archiveDigest) => {
+                    archive.addFolder("/home/foo/bar", "/bar", (err, archiveDigest) => {
                         if (err) {
                             throw err;
                         }
-
-                        console.log("This is the archive's hash", archiveDigest);
-                        archive.listFiles( "/", (err, folders) => {
+                            archive.addFolder("/home/foo", "/foo", (err, archiveDigest) => {
                             if (err) {
                                 throw err;
                             }
 
-                            console.log("These are the folders", folders);
+                            console.log("This is the archive's hash", archiveDigest);
+                            archive.listFiles( "/", (err, folders) => {
+                                if (err) {
+                                    throw err;
+                                }
+
+                                console.log("These are the folders", folders);
+                            });
                         });
                     });
                 });
