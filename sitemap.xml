@@ -3,10 +3,6 @@
                  <url>
         <loc>https://privatesky.xyz/?home</loc>
       </url><url>
-        <loc>https://privatesky.xyz/?About/about</loc>
-      </url><url>
-        <loc>https://privatesky.xyz/?About/how-to-write-documentation-pages</loc>
-      </url><url>
         <loc>https://privatesky.xyz/?PrivateSky/main-innovations</loc>
       </url><url>
         <loc>https://privatesky.xyz/?PrivateSky/architecture</loc>
@@ -24,6 +20,22 @@
         <loc>https://privatesky.xyz/?PrivateSky/how-to-web</loc>
       </url><url>
         <loc>https://privatesky.xyz/?PrivateSky/code-examples</loc>
+      </url><url>
+        <loc>https://privatesky.xyz/?API/privatesky-apis</loc>
+      </url><url>
+        <loc>https://privatesky.xyz/?API/swarms</loc>
+      </url><url>
+        <loc>https://privatesky.xyz/?API/interactions</loc>
+      </url><url>
+        <loc>https://privatesky.xyz/?API/error-handling</loc>
+      </url><url>
+        <loc>https://privatesky.xyz/?API/domains</loc>
+      </url><url>
+        <loc>https://privatesky.xyz/?API/blockchain</loc>
+      </url><url>
+        <loc>https://privatesky.xyz/?API/bars</loc>
+      </url><url>
+        <loc>https://privatesky.xyz/?API/rawdossiers</loc>
       </url><url>
         <loc>https://privatesky.xyz/?EDFS/edfs</loc>
       </url><url>
@@ -179,21 +191,9 @@
       </url><url>
         <loc>https://privatesky.xyz/?Development/tests-results</loc>
       </url><url>
-        <loc>https://privatesky.xyz/?API/privatesky-apis</loc>
+        <loc>https://privatesky.xyz/?About/about</loc>
       </url><url>
-        <loc>https://privatesky.xyz/?API/swarms</loc>
-      </url><url>
-        <loc>https://privatesky.xyz/?API/interactions</loc>
-      </url><url>
-        <loc>https://privatesky.xyz/?API/error-handling</loc>
-      </url><url>
-        <loc>https://privatesky.xyz/?API/domains</loc>
-      </url><url>
-        <loc>https://privatesky.xyz/?API/blockchain</loc>
-      </url><url>
-        <loc>https://privatesky.xyz/?API/bars</loc>
-      </url><url>
-        <loc>https://privatesky.xyz/?API/rawdossiers</loc>
+        <loc>https://privatesky.xyz/?About/how-to-write-documentation-pages</loc>
       </url><url>
         <loc>https://privatesky.xyz/?glossary</loc>
       </url>
