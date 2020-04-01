@@ -8,7 +8,7 @@
 
 :host {
     scroll-behavior: smooth;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 100vh;
     display: block;
 }

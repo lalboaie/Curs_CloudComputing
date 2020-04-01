@@ -355,7 +355,10 @@
                     },
                     {
                         "name": "Tests Results",
-                        "pageSrc":"https://raw.githubusercontent.com/PrivateSky/privatesky/test_reports/tests/psk-smoke-testing/testReport.html"
+                        "pageSrc":"https://raw.githubusercontent.com/PrivateSky/privatesky/test_reports/tests/psk-smoke-testing/testReport.html",
+                        "options": {
+                            "type": "iframe"
+                        }
                     }
                 ]
             },
