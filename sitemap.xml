@@ -177,6 +177,8 @@
       </url><url>
         <loc>https://privatesky.xyz/?Development/annotation-engine</loc>
       </url><url>
+        <loc>https://privatesky.xyz/?Development/tests-results</loc>
+      </url><url>
         <loc>https://privatesky.xyz/?API/privatesky-apis</loc>
       </url><url>
         <loc>https://privatesky.xyz/?API/swarms</loc>
