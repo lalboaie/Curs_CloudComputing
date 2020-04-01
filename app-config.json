@@ -21,18 +21,7 @@
                 "icon": "fa-home",
                 "pageSrc": "index.html"
             },
-            {
-                "name": "About",
-                "path": "/About",
-                "icon": "fa-cog",
-                "children": [{
-                        "name": "About"
-                    },
-                    {
-                        "name": "How to write documentation pages"
-                    }
-                ]
-            },
+
             {
                 "name": "PrivateSky",
                 "path": "/PrivateSky",
@@ -71,6 +60,36 @@
                     },
                     {
                         "name": "Code Examples"
+                    }
+                ]
+            },
+            {
+                "name": "APIs",
+                "path": "/API",
+                "icon": "fa-cog",
+                "children": [{
+                    "name": "PrivateSky APIs"
+                },
+                    {
+                        "name": "Swarms"
+                    },
+                    {
+                        "name": "Interactions"
+                    },
+                    {
+                        "name": "Error Handling"
+                    },
+                    {
+                        "name": "Domains"
+                    },
+                    {
+                        "name": "Blockchain"
+                    },
+                    {
+                        "name": "BARs"
+                    },
+                    {
+                        "name": "RawDossiers"
                     }
                 ]
             },
@@ -363,32 +382,14 @@
                 ]
             },
             {
-                "name": "APIs",
-                "path": "/API",
+                "name": "About",
+                "path": "/About",
                 "icon": "fa-cog",
                 "children": [{
-                        "name": "PrivateSky APIs"
-                    },
+                    "name": "About"
+                },
                     {
-                        "name": "Swarms"
-                    },
-                    {
-                        "name": "Interactions"
-                    },
-                    {
-                        "name": "Error Handling"
-                    },
-                    {
-                        "name": "Domains"
-                    },
-                    {
-                        "name": "Blockchain"
-                    },
-                    {
-                        "name": "BARs"
-                    },
-                    {
-                        "name": "RawDossiers"
+                        "name": "How to write documentation pages"
                     }
                 ]
             },
