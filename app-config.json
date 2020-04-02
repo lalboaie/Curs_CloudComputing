@@ -67,9 +67,11 @@
                 "name": "APIs",
                 "path": "/API",
                 "icon": "fa-cog",
-                "children": [{
-                    "name": "PrivateSky APIs"
-                },
+                "children": [
+                    {
+                        "name": "PrivateSky APIs"
+
+                    },
                     {
                         "name": "Swarms"
                     },
@@ -93,6 +95,15 @@
                     },
                     {
                         "name": "VirtualMQ"
+                    },
+                    {
+                        "name": "Brick Storage"
+                    },
+                    {
+                        "name": "Anchoring"
+                    },
+                    {
+                        "name": "Communication"
                     }
                 ]
             },

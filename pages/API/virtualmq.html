@@ -1,169 +1,113 @@
 <psk-page title="VirtualMQ APIs">
-    <psk-toc></psk-toc>
-    <psk-chapter title="createVirtualMQ">
-          The <b>createVirtualMQ()</b> method creates and starts a VirtualMQ server.
-        <psk-chapter title="Syntax">
-            <psk-code language="JavaScript">
-                createVirtualMQ(port, rootFolder, sslConfig, callback)
-            </psk-code>
-            <psk-chapter title="Parameters">
-                <i><b>port</b></i><br><br>
-                    The port on on which the server is listening for requests.
-                <i><b>rootFolder</b></i><br><br>
-                    The folder where the server keeps the files uploaded on it.
-                <i><b>sslConfig</b></i> <b>|</b>Optional<br><br>
-                    An object that configures, among others, the communication protocol used to communicate with clients.
-                By default, "http" is used.
-                <i><b>callback</b></i><br><br>
-                    The function called when the server is started.<br><br>
-            </psk-chapter>
-            <psk-chapter tile="Return value">
-                An instance of VirtualMQ class.
-            </psk-chapter>
-        </psk-chapter>
+    VirtualMQ is an expandable HTTP server
+    <psk-toc title="In this section"></psk-toc>
+    <psk-chapter title="How to create a VirtualMQ server">
+        <psk-card title="createVirtualMQ">
+            The <code>createVirtualMQ()</code> method creates and starts a VirtualMQ server.
+            <psk-card title="Syntax">
+                <psk-code language="JavaScript">
+                    createVirtualMQ(port, rootFolder, sslConfig, callback)
+                </psk-code>
+                <psk-list list-type="unordered">
+                    <psk-card title="Parameters">
+                        <psk-list list-type="unordered">
+                            <code><b>port</b></code>
+                            The port on on which the server is listening for requests.<br><br>
+                            <code><b>rootFolder</b></code>
+                            The folder where the server keeps the files uploaded on it.<br><br>
+                            <code><b>sslConfig</b></code> <b>|</b>Optional
+                            An object that configures, among others, the communication protocol used to communicate with
+                            clients.
+                            By default, "http" is used.<br><br>
+                            <code><b>callback</b></code>
+                            The function called when the server is started.<br><br>
+                        </psk-list>
+                    </psk-card>
+                    <psk-card title="Return value">
+                        The server instance.
+                    </psk-card>
+                </psk-list>
+            </psk-card>
 
-        <psk-chapter title="Description">
-            The <b>createVirtualMQ()</b> method starts a VirtualMQ server and returns its instance.
-        </psk-chapter>
+            <psk-card title="Description">
+                The <code>createVirtualMQ()</code> method starts a VirtualMQ server and returns its instance.
+            </psk-card>
 
-        <psk-chapter title="Examples">
-            In the following example, a server that listens on port 8080 and saves files in folder "/foo/tmp"
-            is created.
-            <psk-code language="JavaScript">
-                const VirtualMQ = require("virtualmq");
-                const port = 8080;
-                const server VirtualMQ.createVirtualMQ(port, "/foo/tmp", undefined, (err) => {
+            <psk-card title="Examples">
+                In the following example, a server that listens on port 8080 and saves files in folder "/foo/tmp"
+                is created.
+                <psk-code language="JavaScript">
+                    const VirtualMQ = require("virtualmq");
+                    const port = 8080;
+                    const server VirtualMQ.createVirtualMQ(port, "/foo/tmp", undefined, (err) => {
                     if (err) {
-                        throw err;
+                    throw err;
                     }
 
-
                     console.log("The server was started and is listening on port", port);
-                });
-            </psk-code>
+                    });
+                </psk-code>
 
-        </psk-chapter>
-    </psk-chapter>
-    <psk-chapter title="Brick Storage API">
-        <psk-chapter title="put brick">
-            Saves a brick in EDFS Brick Storage.
-            <psk-chapter title="URL"></psk-chapter>
-                <i>/:fileId</i>
-                <psk-chapter title="Method">
-                    <i>POST</i>
-                </psk-chapter>
-                <psk-chapter title="URL Params">
-                    <psk-chapter title="Required">
-                        <i>fileId = [alphanumeric]</i>
-                    </psk-chapter>
-                </psk-chapter>
-                <psk-chapter title="Data Params">
-                    <psk-chapter title="Required">
-                        Content-Type: <i>application/octet-stream</i><br><br>
-                        Content: <i>data stream</i>
-                    </psk-chapter>
-                </psk-chapter>
-                <psk-chapter title="Success Response">
-                    Code: <i>200 OK</i><br><br>
-                    Content: <i>None</i>
-                </psk-chapter>
-            <p class="subtitle">
-                ============================================================================
-                ============================================================================
-            </p>
-        </psk-chapter>
-        <psk-chapter title="get brick">
-            Retrieves a brick from EDFS Brick Storage.
-            <psk-chapter title="URL"></psk-chapter>
-                <i>/:fileId</i>
-                <psk-chapter title="Method">
-                    <i>GET</i>
-                </psk-chapter>
-                <psk-chapter title="URL Params">
-                    <psk-chapter title="Required">
-                        <i>fileId = [alphanumeric]</i>
-                    </psk-chapter>
-                </psk-chapter>
-                <psk-chapter title="Data Params">
-                    <i>None</i>
-                </psk-chapter>
-                <psk-chapter title="Success Response">
-                    Code: <i>200 OK</i><br><br>
-                    Content-Type: <i>application/octet-stream</i>
-                    Content: <i>data stream</i>
-                </psk-chapter>
-                <psk-chapter title="Error Response">
-                    Code: <i>404</i><br><br>
-                    Reason: The file does not exist.
-                </psk-chapter>
-        </psk-chapter>
-            <p class="subtitle">
-                ============================================================================
-                ============================================================================
-            </p>
-        </psk-chapter>
-
-    <psk-chapter title="Anchoring API">
-        <psk-chapter title="add anchor">
-            Associates an anchor to a brick id.
-            <psk-chapter title="URL"></psk-chapter>
-                <i>/addAnchor/:fileId</i>
-            <psk-chapter title="Method">
-                <i>POST</i>
-            </psk-chapter>
-            <psk-chapter title="URL Params">
-                <psk-chapter title="Required">
-                    <i>fileId = [alphanumeric]</i>
-                </psk-chapter>
-            </psk-chapter>
-            <psk-chapter title="Data Params">
-                <psk-chapter title="Required">
-                    Content-Type: <i>text/plain</i><br><br>
-                    Content: <i>anchor</i>
-                </psk-chapter>
-            </psk-chapter>
-            <psk-chapter title="Success Response">
-                Code: <i>200 OK</i><br><br>
-                Content: <i>None</i>
-            </psk-chapter>
-            <p class="subtitle">
-                ============================================================================
-                ============================================================================
-            </p>
-        </psk-chapter>
-
-        <psk-chapter title="get versions">
-            Retrieves a brick from EDFS Brick Storage.
-            <psk-chapter title="URL"></psk-chapter>
-                <i>/getVersions/:anchor</i>
-                <psk-chapter title="Method">
-                    <i>GET</i>
-                </psk-chapter>
-                <psk-chapter title="URL Params">
-                    <psk-chapter title="Required">
-                        <i>anchor = [alphanumeric]</i>
-                    </psk-chapter>
-                </psk-chapter>
-                <psk-chapter title="Data Params">
-                    <i>None</i>
-                </psk-chapter>
-                <psk-chapter title="Success Response">
-                    Code: <i>200 OK</i><br><br>
-                    Content-Type: <i>application/json</i>
-                    Content: <i>brick hashes</i>
-                </psk-chapter>
-                <psk-chapter title="Error Response">
-                    Code: <i>404</i><br><br>
-                    Reason: The anchor does not exist.
-                </psk-chapter>
-        </psk-chapter>
-            <p class="subtitle">
-                ============================================================================
-                ============================================================================
-            </p>
-    </psk-chapter>
-    <psk-chapter title="Communication API">
-
+            </psk-card>
+        </psk-card>
     </psk-chapter>
 
+    <psk-chapter title="How to expand a VirtualMQ server">
+        The <code>createVirtualMQ()</code> method starts a HTTP server and return the server instance. As a result, the
+        server can be dynamically
+        expanded using the API below.
+        <psk-card title="server.put()">
+            <psk-card title="Syntax">
+                <psk-code language="JavaScript">
+                    server.put(url, handler);
+                </psk-code>
+                <psk-card title="Parameters">
+                    <psk-list list-type="unordered">
+                        <code><b>url</b></code>
+                        The url where the server listens for <code>PUT</code> requests.
+                        <code><b>handler</b></code>
+                        The function called when the server receives a <code>PUT</code> request at the specified url.
+                    </psk-list>
+                </psk-card>
+            </psk-card>
+        </psk-card>
+        <psk-card title="server.post()">
+            <psk-card title="Syntax">
+                <psk-code language="JavaScript">
+                    server.post(url, handler);
+                </psk-code>
+                <psk-card title="Parameters">
+                    <psk-list list-type="unordered">
+                        <code><b>url</b></code>
+                        The url where the server listens for <code>POST</code> requests.
+                        <code><b>handler</b></code>
+                        The function called when the server receives a <code>POST</code> request at the specified url.
+                    </psk-list>
+                </psk-card>
+            </psk-card>
+        </psk-card>
+        <psk-card title="server.get()">
+            <psk-card title="Syntax">
+                <psk-code language="JavaScript">
+                    server.put(url, handler);
+                </psk-code>
+                <psk-card title="Parameters">
+                    <psk-list list-type="unordered">
+                        <code><b>url</b></code>
+                        The url where the server listens for <code>GET</code> requests.
+                        <code><b>handler</b></code>
+                        The function called when the server receives a <code>GET</code> request at the specified url.
+                    </psk-list>
+                </psk-card>
+            </psk-card>
+        </psk-card>
+
+    </psk-chapter>
+    <psk-chapter title="Default VirtualMQ Middleware">
+        <psk-list list-type="unordered">
+            <psk-link page="apis/brick-storage">Brick Storage</psk-link>
+            <psk-link page="apis/anchoring">Anchoring</psk-link>
+            <psk-link page="apis/communication">Communication</psk-link>
+        </psk-list>
+    </psk-chapter>
 </psk-page>
