@@ -40,11 +40,11 @@
                     const VirtualMQ = require("virtualmq");
                     const port = 8080;
                     const server VirtualMQ.createVirtualMQ(port, "/foo/tmp", undefined, (err) => {
-                    if (err) {
-                    throw err;
-                    }
+                        if (err) {
+                            throw err;
+                        }
 
-                    console.log("The server was started and is listening on port", port);
+                        console.log("The server was started and is listening on port", port);
                     });
                 </psk-code>
 
@@ -89,7 +89,7 @@
         <psk-card title="server.get()">
             <psk-card title="Syntax">
                 <psk-code language="JavaScript">
-                    server.put(url, handler);
+                    server.get(url, handler);
                 </psk-code>
                 <psk-card title="Parameters">
                     <psk-list list-type="unordered">
