@@ -39,6 +39,12 @@
       </url><url>
         <loc>https://privatesky.xyz/?API/virtualmq</loc>
       </url><url>
+        <loc>https://privatesky.xyz/?API/brick-storage</loc>
+      </url><url>
+        <loc>https://privatesky.xyz/?API/anchoring</loc>
+      </url><url>
+        <loc>https://privatesky.xyz/?API/communication</loc>
+      </url><url>
         <loc>https://privatesky.xyz/?EDFS/edfs</loc>
       </url><url>
         <loc>https://privatesky.xyz/?EDFS/brick-archives</loc>
