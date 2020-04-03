@@ -1,6 +1,21 @@
 <psk-page title="VirtualMQ APIs">
-    VirtualMQ is an expandable HTTP server
+    <psk-highlight type-of-highlight="note">
+        VirtualMQ is a HTTP server that allows the communication between PrivateSky nodes and/or agents inside a node, allows the
+        storage and retrieval of bricks (blocks of data stored on the server in files identified by the block's cryptographic hash) and
+        allows the grouping of different bricks under the same unique identifier (<code>anchor</code>). Each one of the three components is
+        explained in more detail at the links below.
+        The VirtualMQ server can also be expanded to include custom services (besides the default ones below). The section
+        <a href="?API/virtualmq&chapter=how-to-expand-a-virtualmq-server"> <code>How to expand a VirtualMQ server</code> </a> explains in more
+        detail how a VirtualMQ server can be expanded.
+    </psk-highlight>
     <psk-toc title="In this section"></psk-toc>
+    <psk-chapter title="Default VirtualMQ services">
+        <psk-list list-type="unordered">
+            <psk-link page="apis/brick-storage">Brick Storage</psk-link>
+            <psk-link page="apis/anchoring">Anchoring</psk-link>
+            <psk-link page="apis/message-passing">Message Passing</psk-link>
+        </psk-list>
+    </psk-chapter>
     <psk-chapter title="How to create a VirtualMQ server">
         <psk-card title="createVirtualMQ">
             The <code>createVirtualMQ()</code> method creates and starts a VirtualMQ server.
@@ -102,12 +117,5 @@
             </psk-card>
         </psk-card>
 
-    </psk-chapter>
-    <psk-chapter title="Default VirtualMQ Middleware">
-        <psk-list list-type="unordered">
-            <psk-link page="apis/brick-storage">Brick Storage</psk-link>
-            <psk-link page="apis/anchoring">Anchoring</psk-link>
-            <psk-link page="apis/communication">Communication</psk-link>
-        </psk-list>
     </psk-chapter>
 </psk-page>
