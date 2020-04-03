@@ -45,6 +45,8 @@
       </url><url>
         <loc>https://privatesky.xyz/?API/communication</loc>
       </url><url>
+        <loc>https://privatesky.xyz/?API/ssapp</loc>
+      </url><url>
         <loc>https://privatesky.xyz/?EDFS/edfs</loc>
       </url><url>
         <loc>https://privatesky.xyz/?EDFS/brick-archives</loc>
